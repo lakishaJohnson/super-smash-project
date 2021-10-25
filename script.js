@@ -24,6 +24,10 @@ for(let character of characters) {
 //STEP 3<--------------DISPLAY INFO FOR SELECTED CHARACTER------------------->
 let selectedCharacter
 const description =  document.querySelector("#display-info")
+const leaveReview = document.querySelector("#review")
+const label = document.createElement("label")
+leaveReview.prepend(label)
+
 dropdown.addEventListener("change", (event) => {
   event.preventDefault()
   
@@ -35,12 +39,21 @@ dropdown.addEventListener("change", (event) => {
       <h3>Weight Ranking: ${selectedCharacter.weight}</h3>
       <p>${selectedCharacter.guide}</p>
       `
-      const leaveReview = document.querySelector("#review")
-      const label = document.createElement("label")
       label.innerHTML = `Leave a review for <strong>${selectedCharacter.name}</strong>`
-      leaveReview.prepend(label)
     }
   });
 })
+  //STEP 4<-----------LEAVE A REVIEW FOR SELECTED CHARACTER-------------------->
+const form = document.querySelector("#review")
+form.addEventListener("submit", (event) => {
+  event.preventDefault()
+
+  const li = document.createElement("li")
+  const input = document.querySelector("#written")
+  const ul = document.querySelector("ul")
+  li.innerHTML = `<strong>${selectedCharacter.name}:</strong> ${input.value}`
+  ul.append(li)
+  event.target.reset()
+
 })
-//STEP 4<-----------LEAVE A REVIEW FOR SELECTED CHARACTER-------------------->
+})
